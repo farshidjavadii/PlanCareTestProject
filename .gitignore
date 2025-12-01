@@ -416,3 +416,77 @@ FodyWeavers.xsd
 *.msix
 *.msm
 *.msp
+
+# ===== .NET / C# =====
+
+# Build results
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+[Ll]ogs/
+
+# Visual Studio
+.vs/
+*.user
+*.suo
+*.cache
+*.sln.docstates
+
+# .NET Core
+artifacts/
+project.lock.json
+project.fragment.lock.json
+
+# ASP.NET temp & generated files
+Generated\ Files/
+ScaffoldingReadMe.txt
+
+# NuGet
+*.nupkg
+*.snupkg
+**/[Pp]ackages/*
+!**/[Pp]ackages/build/
+*.nuget.props
+*.nuget.targets
+
+# Entity Framework
+*.dbmdl
+
+# Test results
+[Tt]est[Rr]esult*/
+[Bb]uild[Ll]og.*
+*.trx
+
+# Coverage
+coverage*.json
+coverage*.xml
+coverage*.info
+
+# Publish
+publish/
+*.pubxml
+*.publishproj
+
+# Azure
+*.azurePubxml
+PublishScripts/
+
+# ReSharper
+_ReSharper*/
+*.DotSettings.user
+
+# Rider
+.idea/
+
+# Others
+*.pfx
+*.snk
+*.jfm
+*.svclog
+ClientBin/
+*.vspscc
+*.vssscc
+
+# Local History
+.vshistory/
+
