@@ -15,13 +15,19 @@ namespace Application.Mapper
     {
         public CarMapper()
         {
-            
+
             // Car -> CarDto
             CreateMap<Car, CarDto>();
 
             // Car -> CarStatusDto
             CreateMap<Car, CarStatusDto>()
-                .ForMember(dest => dest.IsValid, opt => opt.MapFrom(src => src.IsRegistrationValid));
+                .ConstructUsing(c =>
+                    new CarStatusDto(
+                    c.Plate,
+                    c.IsRegistrationValid,
+                    c.RegistrationExpiry
+                    )
+                );
         }
     }
 }

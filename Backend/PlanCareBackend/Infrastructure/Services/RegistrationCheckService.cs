@@ -1,6 +1,7 @@
 ﻿using Application.Contracts.Service;
 using Infrastructure.Hubs;
 using Microsoft.AspNetCore.SignalR;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
 using System.Collections.Generic;
@@ -10,14 +11,14 @@ using System.Threading.Tasks;
 
 namespace Infrastructure.Services
 {
-    internal class RegistrationCheckService : BackgroundService
+    public class RegistrationCheckService : BackgroundService
     {
-        private readonly ICarService _service;
+        private readonly IServiceScopeFactory _scopeFactory;
         private readonly IHubContext<RegistrationHub> _hub;
 
-        public RegistrationCheckService(ICarService service, IHubContext<RegistrationHub> hub)
+        public RegistrationCheckService(IServiceScopeFactory scopeFactory, IHubContext<RegistrationHub> hub)
         {
-            _service = service;
+            _scopeFactory = scopeFactory;
             _hub = hub;
         }
 
@@ -25,8 +26,12 @@ namespace Infrastructure.Services
         {
             while (!stoppingToken.IsCancellationRequested)
             {
-                var statuses = await _service.CheckRegistrationStatusAsync();
-                await _hub.Clients.All.SendAsync("UpdateRegistration", statuses);
+                using (var scope = _scopeFactory.CreateScope())
+                {
+                    var carService = scope.ServiceProvider.GetRequiredService<ICarService>();
+                    var statuses = await carService.CheckRegistrationStatusAsync();
+                    await _hub.Clients.All.SendAsync("UpdateRegistration", statuses);
+                }
                 await Task.Delay(TimeSpan.FromSeconds(10), stoppingToken);
             }
         }

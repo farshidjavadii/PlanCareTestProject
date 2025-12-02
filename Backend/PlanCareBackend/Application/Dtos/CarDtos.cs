@@ -12,12 +12,12 @@ namespace Application.Dtos
         int Id,
         string Make,
         string Model,
-        string PlateNumber,
+        string Plate,
         DateTime RegistrationExpiry
         );
 
         public record CarStatusDto(
-            string PlateNumber,
+            string Plate,
             bool IsValid,
             DateTime RegistrationExpiry
         );

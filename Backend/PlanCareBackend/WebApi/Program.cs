@@ -1,6 +1,9 @@
+using Application.Contracts.Service;
 using Application.Mapper;
+using Infrastructure.Data;
 using Infrastructure.DI;
 using Infrastructure.Hubs;
+using Infrastructure.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,6 +14,10 @@ builder.Services.AddControllers();
 builder.Services.AddOpenApi();
 
 builder.Services.AddInfrastructureServices();
+builder.Services.AddSignalR();
+
+builder.Services.AddHostedService<RegistrationCheckService>();
+
 builder.Services.AddAutoMapper(cfg => {
     cfg.AddProfile<CarMapper>();
 });
