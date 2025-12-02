@@ -6,7 +6,17 @@ using Infrastructure.Hubs;
 using Infrastructure.Services;
 
 var builder = WebApplication.CreateBuilder(args);
-
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: "localhost",
+            builder =>
+            {
+                builder.WithOrigins("http://localhost:4200") 
+                       .AllowAnyHeader()
+                       .AllowAnyMethod()
+                       .AllowCredentials();
+            });
+});
 // Add services to the container.
 
 builder.Services.AddControllers();
@@ -24,6 +34,7 @@ builder.Services.AddAutoMapper(cfg => {
 
 var app = builder.Build();
 
+app.UseCors("localhost");
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

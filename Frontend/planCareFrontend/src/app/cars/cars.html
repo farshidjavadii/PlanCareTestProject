@@ -1,0 +1,43 @@
+<div class="table-container mat-elevation-z8">
+  
+  <ng-container *ngIf="cars$ | async as carsList">
+    
+    <table mat-table [dataSource]="carsList">
+
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef> ID </th>
+        <td mat-cell *matCellDef="let element"> {{ element.id }} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="make">
+        <th mat-header-cell *matHeaderCellDef> Make </th>
+        <td mat-cell *matCellDef="let element"> {{ element.make }} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="model">
+        <th mat-header-cell *matHeaderCellDef> Model </th>
+        <td mat-cell *matCellDef="let element"> {{ element.model }} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="plate">
+        <th mat-header-cell *matHeaderCellDef> Plate </th>
+        <td mat-cell *matCellDef="let element"> {{ element.plate }} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="registrationExpiry">
+        <th mat-header-cell *matHeaderCellDef> Expiry Date </th>
+        <td mat-cell *matCellDef="let element"> {{ element.registrationExpiry | date: 'mediumDate' }} </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="data-row"></tr>
+
+      <tr class="mat-row empty-data-row" *matNoDataRow>
+        <td class="mat-cell empty-cell" [attr.colspan]="displayedColumns.length">
+          No records found.
+        </td>
+      </tr>
+    </table>
+  </ng-container>
+</div>

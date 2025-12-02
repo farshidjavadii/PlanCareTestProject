@@ -1,0 +1,44 @@
+/* cars.css */
+
+/* General container styling */
+.table-container {
+    margin: 20px auto; 
+    max-width: 900px;
+    overflow-x: auto;
+}
+
+/* Table styling */
+.mat-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+/* Header row style */
+.mat-header-row {
+    background-color: #f0f0f0; /* Light grey background */
+    font-weight: 600;
+}
+
+/* Data rows and hover effect */
+.data-row {
+    transition: background-color 0.3s ease;
+}
+
+.data-row:hover {
+    background-color: #e8f5e9; /* Light green on hover */
+    cursor: pointer;
+}
+
+/* Style for the 'No Data' message row */
+.empty-data-row {
+    height: 60px; 
+}
+
+.empty-cell {
+    text-align: center;
+    font-style: italic;
+    color: #9e9e9e; 
+    padding: 20px;
+    font-size: 16px;
+    background-color: #fafafa;
+}

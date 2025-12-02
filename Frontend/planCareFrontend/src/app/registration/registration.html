@@ -1,0 +1,30 @@
+<div class="container">
+
+
+  <div class="update-time" *ngIf="lastUpdated">
+    Last update: {{ lastUpdated | date:'HH:mm:ss' }}
+  </div>
+
+
+  <table class="simple-table">
+    <thead>
+      <tr>
+        <th>Plate</th>
+        <th>Valid</th>
+        <th>Expiry</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let element of statuses">
+        <td>{{ element.plate }}</td>
+        <td>
+          <span [class.valid]="element.isValid" [class.invalid]="!element.isValid">
+            {{ element.isValid ? '✔ Valid' : '✖ Invalid' }}
+          </span>
+        </td>
+        <td>{{ element.registrationExpiry | date:'yyyy-MM-dd' }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+</div>
