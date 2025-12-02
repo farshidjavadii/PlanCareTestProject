@@ -1,5 +1,6 @@
 using Application.Mapper;
 using Infrastructure.DI;
+using Infrastructure.Hubs;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -28,5 +29,7 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+
+app.MapHub<RegistrationHub>("/registrationHub");
 
 app.Run();
