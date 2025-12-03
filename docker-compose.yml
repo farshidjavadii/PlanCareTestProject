@@ -1,0 +1,21 @@
+services:
+  webapi:
+    build:
+      context: Backend/PlanCareBackend/
+      dockerfile: WebApi/Dockerfile
+    container_name: webapi
+    ports:
+      - "8080:8080"
+      - "8081:8081"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+
+  angular:
+    build:
+      context: ./Frontend/planCareFrontend
+      dockerfile: Dockerfile
+    container_name: angular
+    ports:
+      - "4200:4200"
+    depends_on:
+      - webapi

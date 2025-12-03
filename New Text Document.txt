@@ -1,0 +1,17 @@
+version: '3.9'
+
+services:
+  backend:
+    build: ./backend/CarRegistration.Api
+    ports:
+      - "5000:80"
+      - "5001:443"
+    environment:
+      DOTNET_ENVIRONMENT: Development
+
+  frontend:
+    build:
+      context: ./frontend/car-registration-app
+    ports:
+      - "4200:4200"
+    command: sh -c "npm install && ng serve --host 0.0.0.0"

@@ -22,7 +22,7 @@ export interface CarStatus {
 export class Cars {
   constructor(private http: HttpClient) { }
   getCars(make?: string): Observable<Car[]> {
-    let url = 'https://localhost:44343/api/car'; if (make) url += `?make=${make}`;
+    let url = 'http://localhost:8080/api/car'; if (make) url += `?make=${make}`;
     return this.http.get<Car[]>(url);
   }
 }

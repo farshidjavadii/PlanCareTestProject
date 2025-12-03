@@ -12,7 +12,7 @@ export class RegistrationService {
 
   startConnection() {
     this.hubConnection = new signalR.HubConnectionBuilder()
-      .withUrl('https://localhost:44343/registrationHub')
+      .withUrl('http://localhost:8080/registrationHub')
       .withAutomaticReconnect()
       .build();
 
