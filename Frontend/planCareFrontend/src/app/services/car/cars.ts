@@ -1,6 +1,6 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { catchError,of, throwError, Observable } from 'rxjs';
 
 export interface Car {
   id: number;
@@ -23,6 +23,28 @@ export class Cars {
   constructor(private http: HttpClient) { }
   getCars(make?: string): Observable<Car[]> {
     let url = 'http://localhost:8080/api/car'; if (make) url += `?make=${make}`;
-    return this.http.get<Car[]>(url);
+    return this.http.get<Car[]>(url).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  private handleError(error: HttpErrorResponse) {
+    let errorMessage = '';
+
+    if (error.status === 404) {
+
+      return of([]);
+    }
+    if (error.error instanceof ErrorEvent) {
+
+      errorMessage = `An error occurred: ${error.error.message}`;
+    } else {
+
+      errorMessage = `Server returned code: ${error.status}, error message: ${error.message}`;
+    }
+
+    console.error(errorMessage);
+
+    return throwError(() => new Error(errorMessage));
   }
 }

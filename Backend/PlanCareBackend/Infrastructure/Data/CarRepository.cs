@@ -38,21 +38,18 @@ namespace Infrastructure.Data
 
             };
         }
-
-        public Task<List<CarDto>> GetCarsAsync(string? make = null)
+        public Task<List<Car>> GetCarsAsync(string? make = null)
         {
             var query = _cars.AsQueryable();
             if (!string.IsNullOrEmpty(make))
                 query = query.Where(c => c.Make.Equals(make, StringComparison.OrdinalIgnoreCase));
 
-            var result = _mapper.Map<List<CarDto>>(query.ToList());
+            var result = query.ToList();
             return Task.FromResult(result);
         }
-
-        public Task<List<CarStatusDto>> CheckRegistrationStatusAsync()
-        {
-            var result = _mapper.Map<List<CarStatusDto>>(_cars);
-            return Task.FromResult(result);
+        public Task<List<Car>> GetAllCarsAsync()
+        {            
+            return Task.FromResult(_cars);
         }
     }
 }

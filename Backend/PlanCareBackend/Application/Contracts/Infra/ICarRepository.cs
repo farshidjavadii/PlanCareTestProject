@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Domain.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,7 +10,7 @@ namespace Application.Contracts.Infra
 {
     public interface ICarRepository
     {
-        Task<List<CarDto>> GetCarsAsync(string? make);
-        Task<List<CarStatusDto>> CheckRegistrationStatusAsync();
+        Task<List<Car>> GetCarsAsync(string? make);
+        Task<List<Car>> GetAllCarsAsync();
     }
 }

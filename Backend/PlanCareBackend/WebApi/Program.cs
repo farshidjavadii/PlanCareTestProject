@@ -4,6 +4,7 @@ using Infrastructure.Data;
 using Infrastructure.DI;
 using Infrastructure.Hubs;
 using Infrastructure.Services;
+using WebApi.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddCors(options =>
@@ -33,6 +34,8 @@ builder.Services.AddAutoMapper(cfg => {
 });
 
 var app = builder.Build();
+
+app.ExceptionHandler();
 
 app.UseCors("localhost");
 
